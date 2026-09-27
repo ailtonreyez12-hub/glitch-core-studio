@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escapa De La 25 | Glitch Core Studio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome para Íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Share Tech Mono y Orbitron -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #050508;
+            color: #e2e8f0;
+            font-family: 'Share Tech Mono', monospace;
+            overflow-x: hidden;
+        }
+
+        .font-orbitron {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* Scanlines Overlay */
+        .scanlines {
+            background: linear-gradient(
+                to bottom,
+                rgba(255,255,255,0),
+                rgba(255,255,255,0) 50%,
+                rgba(0, 0, 0, 0.4) 50%,
+                rgba(0, 0, 0, 0.4)
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+
+        /* Subtle Background Grid */
+        .cyber-grid {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(0, 243, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 0, 85, 0.05) 1px, transparent 1px);
+        }
+
+        /* Glitch Animation for "EN DESARROLLO" */
+        .glitch-text {
+            position: relative;
+            display: inline-block;
+            color: #fff;
+            text-shadow: 2px 2px 0px #00f3ff, -2px -2px 0px #ff0055;
+        }
+
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            clip: rect(0, 0, 0, 0);
+        }
+
+        .glitch-text::before {
+            left: -2px;
+            text-shadow: 2px 0 #ff0055;
+            animation: glitch-anim-1 2s infinite linear alternate-reverse;
+        }
+
+        .glitch-text::after {
+            left: 2px;
+            text-shadow: -2px 0 #00f3ff;
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim-1 {
+            0% { clip: rect(20px, 9999px, 15px, 0); }
+            20% { clip: rect(60px, 9999px, 75px, 0); }
+            40% { clip: rect(35px, 9999px, 10px, 0); }
+            60% { clip: rect(80px, 9999px, 50px, 0); }
+            80% { clip: rect(10px, 9999px, 90px, 0); }
+            100% { clip: rect(45px, 9999px, 30px, 0); }
+        }
+
+        @keyframes glitch-anim-2 {
+            0% { clip: rect(10px, 9999px, 80px, 0); }
+            20% { clip: rect(40px, 9999px, 20px, 0); }
+            40% { clip: rect(70px, 9999px, 60px, 0); }
+            60% { clip: rect(15px, 9999px, 30px, 0); }
+            80% { clip: rect(85px, 9999px, 10px, 0); }
+            100% { clip: rect(50px, 9999px, 95px, 0); }
+        }
+
+        /* Neon Glow Effect Cards */
+        .neon-card {
+            background: rgba(10, 10, 18, 0.85);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(0, 243, 255, 0.05);
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+        }
+
+        .neon-card:hover {
+            border-color: rgba(255, 0, 85, 0.5);
+            box-shadow: 0 0 20px rgba(255, 0, 85, 0.2), inset 0 0 20px rgba(255, 0, 85, 0.05);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050508;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #00f3ff;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff0055;
+        }
+    </style>
+</head>
+<body class="relative min-h-screen cyber-grid text-slate-200 selection:bg-cyan-500 selection:text-black">
+
+    <!-- Ambient Overlay Effects -->
+    <div class="fixed inset-0 scanlines z-50 pointer-events-none"></div>
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full filter blur-[120px] pointer-events-none"></div>
+    <div class="fixed bottom-0 right-1/4 w-96 h-96 bg-pink-500/10 rounded-full filter blur-[120px] pointer-events-none"></div>
+
+    <!-- Main Container -->
+    <div class="relative z-10 max-w-5xl mx-auto px-4 py-8 md:py-16 space-y-16">
+
+        <!-- Header / Logo -->
+        <header class="text-center space-y-2">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-950/20 text-cyan-400 text-xs tracking-widest uppercase">
+                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                Roblox Studio Project
+            </div>
+            <h2 class="font-orbitron font-extrabold text-2xl md:text-3xl text-slate-300 tracking-wider">
+                GLITCH CORE STUDIO
+            </h2>
+        </header>
+
+        <!-- Hero Section: EN DESARROLLO -->
+        <section class="text-center space-y-6 py-6 border-y border-cyan-500/20 relative">
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-black px-4 text-cyan-400 text-xs tracking-widest uppercase font-mono">
+                [ STATUS: SYSTEM_ONLINE ]
+            </div>
+
+            <!-- Big Main Title Glitch -->
+            <div class="py-4">
+                <h1 class="font-orbitron font-black text-5xl md:text-7xl lg:text-8xl tracking-tight uppercase glitch-text" data-text="EN DESARROLLO">
+                    EN DESARROLLO
+                </h1>
+            </div>
+
+            <!-- Game Name Tag -->
+            <div class="space-y-2">
+                <p class="text-slate-400 text-sm md:text-base uppercase tracking-widest">PROYECTO EN CAMINO</p>
+                <div class="inline-block bg-gradient-to-r from-cyan-500/20 via-pink-500/20 to-cyan-500/20 p-[1px] rounded-xl">
+                    <div class="bg-black/80 px-6 py-3 rounded-xl border border-cyan-500/30 backdrop-blur-md">
+                        <span class="text-pink-500 font-bold mr-2 text-xl">&gt;</span>
+                        <span class="font-orbitron font-extrabold text-2xl md:text-4xl text-white tracking-wide">
+                            "Escapa De La 25"
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social Media / TikTok Section -->
+        <section class="neon-card rounded-2xl p-6 md:p-8 space-y-6 text-center border border-pink-500/30">
+            <div class="inline-flex items-center gap-2 text-pink-500 font-bold tracking-widest uppercase text-sm">
+                <i class="fa-brands font-bold fa-tiktok text-lg"></i>
+                Comunidad Oficial
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center justify-center gap-8 pt-2">
+                <!-- QR Code Box -->
+                <div class="relative group">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-pink-500 rounded-2xl blur opacity-30 group-hover:opacity-75 transition duration-500"></div>
+                    <div class="relative bg-white p-4 rounded-2xl shadow-2xl flex flex-col items-center">
+                        <!-- TikTok QR Render -->
+                        <div class="w-48 h-48 md:w-56 md:h-56 relative flex items-center justify-center">
+                            <!-- Standard TikTok QR Visualization SVG matching user graphic -->
+                            <svg class="w-full h-full" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Background -->
+                                <rect width="200" height="200" rx="12" fill="white"/>
+                                
+                                <!-- Corner Eyes Top Left -->
+                                <circle cx="35" cy="35" r="22" stroke="black" stroke-width="6" fill="none"/>
+                                <circle cx="35" cy="35" r="12" fill="black"/>
+                                <circle cx="33" cy="35" r="10" fill="#00f3ff"/>
+                                <circle cx="37" cy="35" r="10" fill="#ff0055"/>
+                                <circle cx="35" cy="35" r="10" fill="black"/>
+
+                                <!-- Corner Eyes Top Right -->
+                                <circle cx="165" cy="35" r="22" stroke="black" stroke-width="6" fill="none"/>
+                                <circle cx="165" cy="35" r="12" fill="black"/>
+                                <circle cx="163" cy="35" r="10" fill="#00f3ff"/>
+                                <circle cx="167" cy="35" r="10" fill="#ff0055"/>
+                                <circle cx="165" cy="35" r="10" fill="black"/>
+
+                                <!-- Corner Eyes Bottom Left -->
+                                <circle cx="35" cy="165" r="22" stroke="black" stroke-width="6" fill="none"/>
+                                <circle cx="35" cy="165" r="12" fill="black"/>
+                                <circle cx="33" cy="165" r="10" fill="#00f3ff"/>
+                                <circle cx="37" cy="165" r="10" fill="#ff0055"/>
+                                <circle cx="35" cy="165" r="10" fill="black"/>
+
+                                <!-- QR Matrix Dots Simulation -->
+                                <g fill="black">
+                                    <circle cx="75" cy="25" r="3.5"/><circle cx="85" cy="25" r="3.5"/><circle cx="105" cy="25" r="3.5"/><circle cx="125" cy="25" r="3.5"/>
+                                    <circle cx="65" cy="35" r="3.5"/><circle cx="95" cy="35" r="3.5"/><circle cx="115" cy="35" r="3.5"/><circle cx="135" cy="35" r="3.5"/>
+                                    <circle cx="75" cy="45" r="3.5"/><circle cx="85" cy="45" r="3.5"/><circle cx="105" cy="45" r="3.5"/><circle cx="125" cy="45" r="3.5"/>
+                                    <circle cx="25" cy="75" r="3.5"/><circle cx="45" cy="75" r="3.5"/><circle cx="65" cy="75" r="3.5"/><circle cx="85" cy="75" r="3.5"/><circle cx="105" cy="75" r="3.5"/><circle cx="125" cy="75" r="3.5"/><circle cx="145" cy="75" r="3.5"/><circle cx="175" cy="75" r="3.5"/>
+                                    <circle cx="35" cy="85" r="3.5"/><circle cx="55" cy="85" r="3.5"/><circle cx="75" cy="85" r="3.5"/><circle cx="95" cy="85" r="3.5"/><circle cx="115" cy="85" r="3.5"/><circle cx="135" cy="85" r="3.5"/><circle cx="165" cy="85" r="3.5"/><circle cx="185" cy="85" r="3.5"/>
+                                    <circle cx="25" cy="95" r="3.5"/><circle cx="45" cy="95" r="3.5"/><circle cx="65" cy="95" r="3.5"/><circle cx="85" cy="95" r="3.5"/><circle cx="105" cy="95" r="3.5"/><circle cx="125" cy="95" r="3.5"/><circle cx="155" cy="95" r="3.5"/><circle cx="175" cy="95" r="3.5"/>
+                                    <circle cx="25" cy="115" r="3.5"/><circle cx="55" cy="115" r="3.5"/><circle cx="75" cy="115" r="3.5"/><circle cx="95" cy="115" r="3.5"/><circle cx="115" cy="115" r="3.5"/><circle cx="145" cy="115" r="3.5"/><circle cx="165" cy="115" r="3.5"/><circle cx="185" cy="115" r="3.5"/>
+                                    <circle cx="35" cy="125" r="3.5"/><circle cx="45" cy="125" r="3.5"/><circle cx="65" cy="125" r="3.5"/><circle cx="85" cy="125" r="3.5"/><circle cx="105" cy="125" r="3.5"/><circle cx="125" cy="125" r="3.5"/><circle cx="155" cy="125" r="3.5"/><circle cx="175" cy="125" r="3.5"/>
+                                    <circle cx="25" cy="135" r="3.5"/><circle cx="55" cy="135" r="3.5"/><circle cx="75" cy="135" r="3.5"/><circle cx="95" cy="135" r="3.5"/><circle cx="115" cy="135" r="3.5"/><circle cx="135" cy="135" r="3.5"/><circle cx="165" cy="135" r="3.5"/><circle cx="185" cy="135" r="3.5"/>
+                                    <circle cx="65" cy="155" r="3.5"/><circle cx="85" cy="155" r="3.5"/><circle cx="105" cy="155" r="3.5"/><circle cx="125" cy="155" r="3.5"/><circle cx="145" cy="155" r="3.5"/><circle cx="175" cy="155" r="3.5"/>
+                                    <circle cx="75" cy="165" r="3.5"/><circle cx="95" cy="165" r="3.5"/><circle cx="115" cy="165" r="3.5"/><circle cx="135" cy="165" r="3.5"/><circle cx="155" cy="165" r="3.5"/><circle cx="185" cy="165" r="3.5"/>
+                                    <circle cx="65" cy="175" r="3.5"/><circle cx="85" cy="175" r="3.5"/><circle cx="105" cy="175" r="3.5"/><circle cx="125" cy="175" r="3.5"/><circle cx="145" cy="175" r="3.5"/><circle cx="165" cy="175" r="3.5"/>
+                                </g>
+
+                                <!-- Colored TikTok Accents -->
+                                <circle cx="30" cy="85" r="3" fill="#00f3ff"/>
+                                <circle cx="70" cy="110" r="3" fill="#00f3ff"/>
+                                <circle cx="130" cy="140" r="3" fill="#00f3ff"/>
+                                <circle cx="175" cy="95" r="3" fill="#ff0055"/>
+                                <circle cx="100" cy="120" r="3" fill="#ff0055"/>
+                                <circle cx="160" cy="170" r="3" fill="#ff0055"/>
+                            </svg>
+                        </div>
+                        <span class="text-xs font-bold text-slate-800 mt-2 font-mono">ESCANEA EN TIKTOK</span>
+                    </div>
+                </div>
+
+                <!-- Account Info -->
+                <div class="space-y-4 text-center md:text-left">
+                    <h3 class="text-2xl md:text-3xl font-orbitron font-bold text-white">
+                        Síguenos en TikTok
+                    </h3>
+                    <p class="text-slate-400 max-w-sm">
+                        Mantente al tanto de avances exclusivos, avances del mapa, sneak peeks y novedades directas del desarrollo.
+                    </p>
+                    <div class="inline-block bg-slate-900 border border-slate-700 px-5 py-3 rounded-xl">
+                        <span class="text-pink-500 font-bold text-xl mr-1">@</span>
+                        <span class="text-white font-mono text-lg md:text-xl tracking-wide font-bold">glitch.core.studi</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact & Ideas Section -->
+        <section class="neon-card rounded-2xl p-6 md:p-8 space-y-6 border border-cyan-500/30">
+            <div class="flex items-center gap-3 text-cyan-400 font-bold tracking-widest uppercase text-sm">
+                <i class="fa-solid fa-lightbulb text-lg animate-pulse"></i>
+                Buzón de Ideas y Sugerencias
+            </div>
+
+            <div class="space-y-4">
+                <h3 class="text-2xl md:text-3xl font-orbitron font-bold text-white">
+                    ¡Envíanos tus ideas para "Escapa De La 25"!
+                </h3>
+                <p class="text-slate-300 leading-relaxed">
+                    ¿Tienes una idea genial para un obstáculo, mapa o mecánica en <span class="text-cyan-400 font-bold">"Escapa De La 25"</span>? ¡Queremos leerla! Puedes enviarnos tus propuestas directamente a nuestro correo oficial.
+                </p>
+
+                <!-- Email Display & Copy Box -->
+                <div class="bg-black/60 border border-cyan-500/40 p-4 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="flex items-center gap-3 overflow-hidden w-full sm:w-auto">
+                        <i class="fa-solid fa-envelope text-cyan-400 text-xl"></i>
+                        <span id="emailText" class="font-mono text-cyan-300 text-sm md:text-base font-bold truncate">
+                            glitch.core.studio.oficcial@gmail.com
+                        </span>
+                    </div>
+                    <button onclick="copyEmail()" class="w-full sm:w-auto px-5 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-black font-bold font-orbitron text-xs tracking-wider rounded-lg transition duration-200 flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/20 active:scale-95">
+                        <i class="fa-solid fa-copy"></i>
+                        <span id="copyBtnText">COPIAR CORREO</span>
+                    </button>
+                </div>
+
+                <!-- Note / Disclaimer Box -->
+                <div class="bg-slate-900/80 border-l-4 border-yellow-500 p-4 rounded-r-xl space-y-2 text-sm text-slate-300">
+                    <div class="flex items-center gap-2 font-bold text-yellow-400 uppercase text-xs">
+                        <i class="fa-solid fa-circle-info"></i>
+                        Aviso Importante sobre Sugerencias
+                    </div>
+                    <p class="leading-relaxed">
+                        No aseguramos que todas las ideas serán puestas en el juego. Si mandas tu sugerencia, por favor déjanos tu <span class="text-yellow-300 font-bold">nombre de usuario de Roblox</span> para darte los créditos correspondientes si tu idea es elegida.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Developers Rules / Community Norms Section -->
+        <section class="neon-card rounded-2xl p-6 md:p-8 space-y-6 border border-red-500/40 bg-red-950/10">
+            <div class="flex items-center gap-3 text-red-500 font-bold tracking-widest uppercase text-sm">
+                <i class="fa-solid fa-shield-halved text-lg"></i>
+                Normativa de Desarrolladores y Comunidad
+            </div>
+
+            <div class="space-y-4">
+                <h3 class="text-xl md:text-2xl font-orbitron font-bold text-white flex items-center gap-2">
+                     Reglas Estrictas de Respeto
+                </h3>
+
+                <div class="p-4 bg-red-950/30 border border-red-500/30 rounded-xl space-y-3">
+                    <p class="text-slate-200 text-sm md:text-base leading-relaxed">
+                        Los creadores y desarrolladores de <span class="text-white font-bold">Glitch Core Studio</span> <span class="text-red-400 font-bold">NO toleran intentos de ridiculizar a nadie</span>.
+                    </p>
+                    <p class="text-slate-200 text-sm md:text-base leading-relaxed">
+                        Una de nuestras reglas estrictas es que <span class="text-red-400 font-bold uppercase underline">NO se puede agregar a una persona real al juego</span>.
+                    </p>
+                    <p class="text-slate-300 text-xs md:text-sm leading-relaxed italic bg-black/40 p-3 rounded-lg border-l-2 border-red-500">
+                        "Cualquier intento de ridiculizar a una o varias personas por medio del juego será automáticamente reportado."
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer Section -->
+        <footer class="text-center pt-8 border-t border-slate-800 space-y-3 text-xs text-slate-500">
+            <p class="font-orbitron tracking-widest text-slate-400">
+                GLITCH CORE STUDIO &copy; <span id="year"></span> | ROBLOX STUDIO
+            </p>
+            <p>
+                Desarrollo del juego: <span class="text-cyan-400">"Escapa De La 25"</span>
+            </p>
+        </footer>
+
+    </div>
+
+    <!-- Toast Notification for Clipboard -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none bg-cyan-500 text-black font-bold font-mono px-6 py-3 rounded-xl shadow-2xl flex items-center gap-3">
+        <i class="fa-solid fa-circle-check text-lg"></i>
+        <span>¡Correo copiado al portapapeles!</span>
+    </div>
+
+    <!-- Interactive JavaScript Logic -->
+    <script>
+        // Dynamic Current Year in Footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Copy Email to Clipboard Functionality
+        function copyEmail() {
+            const emailText = document.getElementById('emailText').innerText.trim();
+            
+            // Temporary textarea method for iframe compatibility
+            const tempInput = document.createElement('textarea');
+            tempInput.value = emailText;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            // Update button visual state
+            const btnText = document.getElementById('copyBtnText');
+            const originalText = btnText.textContent;
+            btnText.textContent = '¡COPIADO!';
+
+            // Show Toast Notification
+            const toast = document.getElementById('toast');
+            toast.classList.remove('translate-y-20', 'opacity-0');
+
+            setTimeout(() => {
+                btnText.textContent = originalText;
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
